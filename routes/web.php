@@ -16,3 +16,7 @@
 });*/
 
 Route::get('/',  ['as' => 'home.show',  'uses' => 'HomeController@show']);
+
+Route::get('/banner',  ['as' => 'banner.show',  'uses' => 'BannerController@show']);
+Route::get('/banner-save',  ['as' => 'banner.save',  'uses' => 'BannerController@save']);
+Route::get('/banner-delete',  ['as' => 'banner.delete',  'uses' => 'BannerController@delete']);

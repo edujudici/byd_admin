@@ -854,6 +854,10 @@
 @endsection
 
 @section('scripts')
+
+	<script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
+	<script src="{{ asset('js/sb-admin-charts.min.js') }}"></script>
+	
     {{-- <script type="text/javascript">
 
         var response =  {!! $response !!};

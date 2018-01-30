@@ -4,6 +4,29 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Repository link
+    |--------------------------------------------------------------------------
+    |
+    | This value is the link to access webservice repository.
+    |
+    */
+
+    'repo_link' => env('APP_REPO_LINK', ''),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Repository token
+    |--------------------------------------------------------------------------
+    |
+    | This value is the key of your application in webservice repository. This value is used
+    | to get link reference your images.
+    |
+    */
+
+    'repo_token' => env('APP_REPO_TOKEN', ''),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Name
     |--------------------------------------------------------------------------
     |
@@ -185,6 +208,7 @@ return [
         App\Providers\ContactServiceProvider::class,
         App\Providers\PortfolioServiceProvider::class,
         App\Providers\ServicesServiceProvider::class,
+        App\Providers\BannerServiceProvider::class,
 
     ],
 

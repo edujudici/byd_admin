@@ -16,8 +16,6 @@ class HomeController extends Controller
 
     public function show()
     {
-        // $response = $this->homeI->getData();
     	return view('home');
-            // ->with('response', json_encode($response));
     }
 }
