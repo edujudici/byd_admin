@@ -18,4 +18,12 @@ class HomeController extends Controller
     {
     	return view('home');
     }
+
+    public function test()
+    {
+
+    	$url = 'http://31.220.56.32/image-link/1/b479c6779a09a596';
+    	$response = curlMake($url);
+    	debug($response);  
+    }
 }

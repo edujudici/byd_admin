@@ -15,8 +15,10 @@
 
 @section('content')
     <div id="koBanner">
-        <form>
-        	<!-- ko with: banner -->
+        <!-- ko with: banner -->
+        <div data-bind="visible: $root.banner" style="display: none">
+            <h1>New / Edit Banner</h1>
+            <form>
         		<div class="form-group">
         			<label class="btn btn-info btn-file">
         	            <i class="fa fa-plus" aria-hidden="true"></i>
@@ -40,33 +42,49 @@
         			<input class="form-control" id="txtLink" type="text" placeholder="Enter Link" data-bind="value: link">
         		</div>
         		
-        		<a class="btn btn-primary btn-block" data-bind="click: save">Save</a>
-        	<!-- /ko -->
-        </form>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th width="10%" style="min-width: 50px"></th>
-                            <th width="30%">Title</th>
-                            <th width="30">Description</th>
-                            <th width="30">Link</th>
-                        </tr>
-                    </thead>
-                    <tbody data-bind="foreach: banners">
-                        <tr>
-                            <td class="center">
-                                <i class="fa fa-pencil-square-o cursor-pointer" aria-hidden="true" data-bind="click: edit"></i>
-                                <i class="fa fa-trash-o cursor-pointer" aria-hidden="true" data-bind="click: remove"></i>
-                            </td>
-                            <td><span data-bind="text: title"></span></td>
-                            <td><span data-bind="text: description"></span></td>
-                            <td><span data-bind="text: link"></span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="col-md-6 pull-left">
+                    <a class="btn btn-primary btn-block" data-bind="click: cancel">Cancel</a>
+                </div>
+                <div class="col-md-6 pull-right">
+                    <a class="btn btn-primary btn-block" data-bind="click: save">Save</a>
+                </div>
+            </form>
+        </div>
+        <!-- /ko -->
+        
+        <div data-bind="visible: !banner()">
+            <div class="row">
+                <div class="col-md-3">
+                    <a class="btn btn-primary btn-block" data-bind="click: addBanner">New Banner</a>
+                </div>
             </div>
+
+            <div class="row" style="margin-top: 15px">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th width="10%" style="min-width: 50px"></th>
+                                <th width="30%">Title</th>
+                                <th width="30">Description</th>
+                                <th width="30">Link</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: banners">
+                            <tr>
+                                <td class="center">
+                                    <i class="fa fa-pencil-square-o cursor-pointer" aria-hidden="true" data-bind="click: edit"></i>
+                                    <i class="fa fa-trash-o cursor-pointer" aria-hidden="true" data-bind="click: remove"></i>
+                                </td>
+                                <td><span data-bind="text: title"></span></td>
+                                <td><span data-bind="text: description"></span></td>
+                                <td><span data-bind="text: link"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection
@@ -101,7 +119,7 @@
                 }
             });
 
-            self.erros = ko.validation.group(self);
+            self.errors = ko.validation.group(self);
 
             self.setImage = function(data)
             {
@@ -158,12 +176,15 @@
                 }
 
                 var formData = new FormData();
+                    
+                    if (self.id)
+                        formData.append('id', self.id);
+
                     formData.append('_token', '{{ csrf_token() }}');
-                    formData.append('id', self.id);
                     formData.append('title', self.title());
                     formData.append('description', self.description());
                     formData.append('link', self.link());
-                    formData.append('image', self.file());
+                    formData.append('file', self.file());
 
                 var callback = function(response)
                 {
@@ -175,6 +196,7 @@
                     }
                     else
                     {
+                        self.id = response.data.BAN_ID;
                         alert('save success');
                     }
                 };
@@ -206,6 +228,11 @@
                         }
                     }
                 }                    
+            }
+
+            self.cancel = function()
+            {
+                viewModel.banner(null);
             }
         }
 

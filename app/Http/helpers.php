@@ -27,29 +27,40 @@
   		}
 	}
 
-	function getImage($id)
-	{
-
-		$url = config('app.repo_link');
-		$token = config('app.repo_token');
-
-		$completeUrl = $url.DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR.$token;
-
-		return file_get_contents('http://31.220.56.32/image-link/1/b479c6779a09a596');
-	}
-
-	function curlMake()
+	function curlMake($url, $type = null, $options = [])
 	{
 		try {
 			
-			$curl = new App\Http\CurlApi($completeUrl, array(
-			    //CURLOPT_POSTFIELDS => array('username' => 'user1')
-			)); 
+			// $curl = new App\Http\CurlApi($url, array(
+			//     //CURLOPT_POSTFIELDS => array('username' => 'user1')
+			// ));
 
-			debug($curl);
-
-			return $curl;
+			$curl = new App\Http\CurlApi($url, $type, $options); 
+			return $curl->response;
 		} catch (\RuntimeException $ex) {
 		    die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
 		}
+	}
+
+	function getImageId($file)
+	{
+
+		$url = config('app.repo_get_id');
+		$token = config('app.repo_token');
+		
+		$name = $file->getClientOriginalName();
+		$mimetype = 'image/'.$file->getClientOriginalExtension();
+
+		$options = [
+			'token' => $token,
+			'file' => curl_file_create($file, $mimetype, $name)
+		];
+
+    	$response = json_decode(curlMake($url, 'POST', $options));
+
+    	debug(["======================== response curl ================================"]);
+    	debug($response);
+
+    	
+    	return $response->data;
 	}

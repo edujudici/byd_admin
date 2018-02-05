@@ -17,18 +17,28 @@ class BannerServiceImpl implements BannerInterface {
 		$banners = $this->banner->all();
 		return response()->api($banners);
 	}
+
+	private function findById($id)
+	{
+		return $this->banner->find($id);
+	}
 	
 	public function save($request)
 	{
-		$banner = empty($request->id) ? new Banner : $this->findById($request->id);
-		
-		$banner->BAN_IMAGE_ID = 1;//TODO:
-		$banner->BAN_TITLE = $request->title;
-		$banner->BAN_DESCRIPTION = $request->description;
-		$banner->BAN_LINK = $request->link;
-		$banner->save();
 
-		return response()->api($banner);
+		if (!empty($request->id))
+		{
+			debug('edit banner');
+			$this->banner =  $this->findById($request->id);
+		}
+
+		$this->banner->BAN_IMAGE_ID = getImageId($request->file);
+		$this->banner->BAN_TITLE = $request->title;
+		$this->banner->BAN_DESCRIPTION = $request->description;
+		$this->banner->BAN_LINK = $request->link;
+		$this->banner->save();
+
+		return response()->api($this->banner);
 	}
 
 	public function delete($id)

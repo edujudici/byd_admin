@@ -18,5 +18,10 @@
 Route::get('/',  ['as' => 'home.show',  'uses' => 'HomeController@show']);
 
 Route::get('/banner',  ['as' => 'banner.show',  'uses' => 'BannerController@show']);
-Route::get('/banner-save',  ['as' => 'banner.save',  'uses' => 'BannerController@save']);
-Route::get('/banner-delete',  ['as' => 'banner.delete',  'uses' => 'BannerController@delete']);
+Route::post('/banner-save',  ['as' => 'banner.save',  'uses' => 'BannerController@save']);
+Route::post('/banner-delete',  ['as' => 'banner.delete',  'uses' => 'BannerController@delete']);
+
+
+Route::get('/test',  ['as' => 'test',  'uses' => 'HomeController@test']);
+
+

@@ -7,7 +7,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body"></div>
+            <div class="modal-body" data-bind="text: message"></div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                 <a class="btn btn-primary" data-bind="click: confirm">Confirm</a>
@@ -26,7 +26,7 @@
 
         self.show = function (message, callback)
         {
-            self.message(message ? messsage : 'Confirm this action?');
+            self.message(message ? message : 'Confirm this action?');
             
             self.confirm = callback != undefined 
             ?   function () 
