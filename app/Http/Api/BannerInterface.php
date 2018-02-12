@@ -2,8 +2,8 @@
 
 namespace App\Http\Api;
 
-interface BannerInterface {
-
+interface BannerInterface
+{
 	public function getData();
 	public function save($request);
 	public function delete($id);

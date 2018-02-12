@@ -2,8 +2,8 @@
 
 namespace App\Http\Api;
 
-interface ServicesInterface
-{
+interface TeamSocialNetworkInterface {
+
 	public function getData();
 	public function save($request);
 	public function delete($id);

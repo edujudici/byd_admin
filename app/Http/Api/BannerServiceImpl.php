@@ -5,7 +5,10 @@ namespace App\Http\Api;
 use App\Http\Api\BannerInterface;
 use App\Models\Banner;
 
-class BannerServiceImpl implements BannerInterface {
+class BannerServiceImpl implements BannerInterface
+{
+
+	private $banner;
 
 	public function __construct(Banner $banner)
 	{
@@ -32,7 +35,11 @@ class BannerServiceImpl implements BannerInterface {
 			$this->banner =  $this->findById($request->id);
 		}
 
-		$this->banner->BAN_IMAGE_ID = getImageId($request->file);
+		if (!empty($request->file))
+		{
+			$this->banner->BAN_IMAGE_ID = getImageId($request->file);
+		}
+
 		$this->banner->BAN_TITLE = $request->title;
 		$this->banner->BAN_DESCRIPTION = $request->description;
 		$this->banner->BAN_LINK = $request->link;
@@ -47,7 +54,7 @@ class BannerServiceImpl implements BannerInterface {
 		$banner = $this->findById($id);
 		if (is_null($banner))
 		{
-			return response()->api($company, false, 'Banner not found.');
+			return response()->api($banner, false, 'Banner not found.');
 		}
 
 		$banner->delete();

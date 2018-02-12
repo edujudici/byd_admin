@@ -21,7 +21,7 @@ class BannerController extends Controller
             ->with('response', json_encode($response));
     }
 
-    public function save(Request $req/*BannerFormRequest $req*/)
+    public function save(Request $req)
     {
         return $this->bannerI->save($req);
     }

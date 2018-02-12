@@ -220,6 +220,12 @@ return [
         App\Providers\PortfolioServiceProvider::class,
         App\Providers\ServicesServiceProvider::class,
         App\Providers\BannerServiceProvider::class,
+        App\Providers\CompanyServiceProvider::class,
+        App\Providers\ServicesOfferServiceProvider::class,
+        App\Providers\PartnerServiceProvider::class,
+        App\Providers\AboutServiceProvider::class,
+        App\Providers\TeamServiceProvider::class,
+        App\Providers\TeamSocialNetworkServiceProvider::class,
 
     ],
 

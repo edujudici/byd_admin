@@ -20,11 +20,17 @@
             <h1>New / Edit Banner</h1>
             <form>
         		<div class="form-group">
-        			<label class="btn btn-info btn-file">
+                    <label class="btn btn-info btn-file">
         	            <i class="fa fa-plus" aria-hidden="true"></i>
         	            Load Image <input type="file" hidden data-bind="event: {'change': function() { fileSelected($element); }}">
         	        </label>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <img data-bind="attr: {src: image}" class="img-thumbnail rounded float-left" style="width: 200px; height: 200px">
+                        </div>
+                    </div>
         		</div>
+               
         		<div class="form-group">
         			<div class="form-row">
         				<div class="col-md-6">
@@ -38,9 +44,11 @@
         			</div>
         		</div>
         		<div class="form-group">
-        			<label for="txtLink">Link</label>
-        			<input class="form-control" id="txtLink" type="text" placeholder="Enter Link" data-bind="value: link">
-        		</div>
+                    <div class="form-row">
+            			<label for="txtLink">Link</label>
+            			<input class="form-control" id="txtLink" type="text" placeholder="Enter Link" data-bind="value: link">
+        	        </div>
+                </div>
         		
                 <div class="col-md-6 pull-left">
                     <a class="btn btn-primary btn-block" data-bind="click: cancel">Cancel</a>
@@ -52,7 +60,7 @@
         </div>
         <!-- /ko -->
         
-        <div data-bind="visible: !banner()">
+        <div data-bind="visible: !banner()" style="display: none">
             <div class="row">
                 <div class="col-md-3">
                     <a class="btn btn-primary btn-block" data-bind="click: addBanner">New Banner</a>
@@ -100,12 +108,19 @@
         {
             var self = this;
 
-            self.orign = obj;
+            self.origin = obj;
 
             self.id    = obj.BAN_ID;
             self.link  = ko.observable(obj.BAN_LINK);
             self.image = ko.observable();
-            self.file  = ko.observable();
+            self.file  = ko.observable().extend({
+                required: {
+                    message: "The file field is required",
+                    onlyIf: function() {
+                        return !self.id;
+                    }
+                }
+            });
             self.title = ko.observable(obj.BAN_TITLE).extend({
                 required: {
                     params: true,
@@ -147,19 +162,18 @@
                         var data =
                         {
                             id : item.id,
-                            _token: '{{ csrf_token() }}',
                         },
                         callback = function(response)
                         {
                             if(!response.status)
                             {
-                                alert(response.message);
+                                infoAlert.error([response.message]);
                                 return;
                             }
                             else
                             { 
                                 viewModel.banners.remove(item);
-                                alert(response.message);
+                                infoAlert.success(response.message);
                             }
                         };
                         Api.post(urlBannerDelete, data, callback);
@@ -169,9 +183,10 @@
 
             self.save = function()
             {
+                infoAlert.error([]);
                 if (self.errors().length > 0)
                 {
-                    alert(self.erros());
+                    infoAlert.error(self.errors());
                     return;
                 }
 
@@ -179,28 +194,46 @@
                     
                     if (self.id)
                         formData.append('id', self.id);
+                    
+                    if (self.file())
+                        formData.append('file', self.file());
 
-                    formData.append('_token', '{{ csrf_token() }}');
                     formData.append('title', self.title());
                     formData.append('description', self.description());
                     formData.append('link', self.link());
-                    formData.append('file', self.file());
 
                 var callback = function(response)
                 {
                     if(!response.status)
                     {
-                        self.id = response.data.BAN_ID;
-                        alert(response.message);
+                        infoAlert.error([response.message]);
                         return;
                     }
                     else
                     {
                         self.id = response.data.BAN_ID;
-                        alert('save success');
+                        self.origin = response.data;
+                        viewModel.banner(null);
+                        infoAlert.success();
                     }
                 };
                 Api.postImage(urlBannerSave, formData, callback);
+            }
+
+            self.goBackData = function(item)
+            {
+                var dataOld = new Banner(self.origin),
+                    position = viewModel.banners.indexOf(item);
+                viewModel.banners.splice(position,1,dataOld);
+            }
+
+            self.cancel = function(item)
+            {
+                if (!item.id)
+                    viewModel.banners.remove(item);
+                else
+                    self.goBackData(item);
+                viewModel.banner(null);                
             }
 
             self.fileSelected = function(el) {
@@ -213,14 +246,14 @@
                     while ( file = el.files[ ++counter ] ) {
                         
                         if(file.size > 10 * 1024 * 1024) {
-                            alert('File too big.');
+                            infoAlert.error(['File too big.']);
 
                         } else {
                             var fileNamePieces = file.name.split('.');
                             var extension = fileNamePieces[fileNamePieces.length - 1];
 
                             if (extension != 'jpg' && extension != 'png' && extension != 'jpeg') {
-                                alert('File invalid.');
+                                infoAlert.error(['File invalid.']);
                                 return;
                             }
                             
@@ -230,10 +263,14 @@
                 }                    
             }
 
-            self.cancel = function()
+            self.loadImageComp = ko.computed(function()
             {
-                viewModel.banner(null);
-            }
+                if (self.file())
+                {
+                    var url = URL.createObjectURL(self.file());
+                    self.image(url);
+                }
+            });
         }
 
         function ViewModel()

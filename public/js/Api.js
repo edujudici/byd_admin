@@ -3,8 +3,21 @@ function Api()
 
 }
 
+Api.ajaxSetup = function()
+{
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+}
+
 Api.post = function(url, data, callback)
 {
+
+    Api.ajaxSetup();
+    //Api.showLoading();
+
     $.post( url, data, function(data) {
         try
         {
@@ -19,18 +32,22 @@ Api.post = function(url, data, callback)
     {
         if ($err.status == 422)
         {
-            alert($err.responseJSON.description);
+            infoAlert.error([$err.responseJSON.description]);
             return;
         }
-        alert('Ocorreu um erro na execução do serviço.');
+        infoAlert.error(['Ocorreu um erro na execução do serviço.']);
     })
     .always(function()
     {
+        //Api.hideLoading();
     });
 }
 
 Api.postImage = function(url, formData, callback) {
-            
+      
+    Api.ajaxSetup();      
+    //Api.showLoading();
+
     $.ajax({
         url: url,
         cache: false,
@@ -53,13 +70,14 @@ Api.postImage = function(url, formData, callback) {
         {
             if ($err.status == 422)
             {
-                alert($err.responseJSON.description);
+                infoAlert.error([$err.responseJSON.description]);
                 return;
             }
-            alert('Ocorreu um erro na execução do serviço.');
+            infoAlert.error(['Ocorreu um erro na execução do serviço.']);
         },
         complete: function()
         {
+            //Api.hideLoading();
         }
     });
 };
@@ -69,7 +87,7 @@ Api.get = function(url, callback)
     $.get(url, callback)
     .fail(function()
     {
-        alert('Ocorreu um erro na execução do serviço.');
+        infoAlert.error(['Ocorreu um erro na execução do serviço.']);
     })
     .always(function()
     {
@@ -101,4 +119,14 @@ Api.groupList = function(list, groupedTotal)
 Api.url = function(id)
 {
     return repo_link+'/'+id+'/'+repo_token;
+}
+
+Api.showLoading = function()
+{
+    waitingDialog.show();
+}
+
+Api.hideLoading = function()
+{
+    waitingDialog.hide();
 }

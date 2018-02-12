@@ -2,9 +2,8 @@
 
 namespace App\Http\Api;
 
-interface ServicesInterface
-{
+interface CompanyInterface {
+
 	public function getData();
 	public function save($request);
-	public function delete($id);
 }
