@@ -17,8 +17,9 @@ class AboutServiceImpl implements AboutInterface
 
     public function getData()
     {
-        $aboutList = $this->about->all();
-        return response()->api($aboutList);
+        $data['aboutList'] = $this->about->all();
+        $data['aboutTypes'] = $this->about->getTypes();
+        return response()->api($data);
     }
 
     private function findById($id)

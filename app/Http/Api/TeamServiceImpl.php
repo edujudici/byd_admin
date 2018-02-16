@@ -49,6 +49,9 @@ class TeamServiceImpl implements TeamInterface {
 	public function delete($id)
 	{
 
+		$socialNetworkI = app(TeamSocialNetworkInterface::class);
+		$socialNetworkI->deleteByTeam($id);
+
 		$person = $this->findById($id);
 		if (is_null($person))
 		{

@@ -14,4 +14,14 @@ class About extends Model
 
     protected $table = 'ABOUT';
     protected $primaryKey = 'ABO_ID';
+
+    public function getTypes()
+    {
+    	return [
+    		['id' => self::WHAT_WE_ARE,   'description' => 'O que nós oferecemos'],
+			['id' => self::OUR_HISTORY,   'description' => 'Nossa história'],
+			['id' => self::WHY_CHOOSE_US, 'description' => 'Porque escolher nós'],
+			['id' => self::OUR_SERVICES,  'description' => 'Nossos Serviços'],
+    	];
+    }
 }

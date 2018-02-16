@@ -9,20 +9,20 @@ class TeamSocialNetworkServiceImpl implements TeamSocialNetworkInterface {
 
 	private $teamSocialNetwork;
 
-	public function __construct(TeamSocialNetwork $teamSocialNetwork)
+	public function __construct(TeamSocialNetwork $socialNetwork)
 	{
-		$this->teamSocialNetwork = $teamSocialNetwork;
+		$this->socialNetwork = $socialNetwork;
 	}
 
 	public function getData()
 	{
-		$teamSocialNetworkList = $this->teamSocialNetwork->all();
-		return response()->api($teamSocialNetworkList);
+		$socialNetworks = $this->socialNetwork->all();
+		return response()->api($socialNetworks);
 	}
 
 	private function findById($id)
 	{
-		return $this->teamSocialNetwork->find($id);
+		return $this->socialNetwork->find($id);
 	}
 	
 	public function save($request)
@@ -30,29 +30,34 @@ class TeamSocialNetworkServiceImpl implements TeamSocialNetworkInterface {
 
 		if (!empty($request->id))
 		{
-			debug('edit teamSocialNetwork');
-			$this->teamSocialNetwork =  $this->findById($request->id);
+			debug('edit socialNetwork');
+			$this->socialNetwork =  $this->findById($request->id);
 		}
 
-		$this->teamSocialNetwork->TEA_ID = $request->teamId;
-		$this->teamSocialNetwork->TSN_ICON = $request->icon;
-		$this->teamSocialNetwork->TSN_LINK = $request->link;
-		$this->teamSocialNetwork->save();
+		$this->socialNetwork->TEA_ID = $request->teamId;
+		$this->socialNetwork->TSN_ICON = $request->icon;
+		$this->socialNetwork->TSN_LINK = $request->link;
+		$this->socialNetwork->save();
 
-		return response()->api($this->teamSocialNetwork);
+		return response()->api($this->socialNetwork);
 	}
 
 	public function delete($id)
 	{
 
-		$teamSocialNetwork = $this->findById($id);
+		$socialNetwork = $this->findById($id);
 		if (is_null($teamSocialNetwork))
 		{
-			return response()->api($teamSocialNetwork, false, 'TeamSocialNetwork not found.');
+			return response()->api($socialNetwork, false, 'SocialNetwork not found.');
 		}
 
-		$teamSocialNetwork->delete();
+		$socialNetwork->delete();
 
-		return response()->api($teamSocialNetwork);
+		return response()->api($socialNetwork);
+	}
+
+	public function deleteByTeam($teamId)
+	{
+		$this->socialNetwork->where('TEA_ID', $teamId)->delete();
 	}
 }

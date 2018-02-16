@@ -34,7 +34,15 @@
         		<div class="form-group">
         			<div class="form-row">
 	        			<label for="txtType">Type</label>
-	        			<input class="form-control" id="txtType" type="text" placeholder="Enter type" data-bind="value: type">
+	        			{{-- <input class="form-control" id="txtType" type="text" placeholder="Enter type" data-bind="value: type"> --}}
+                        <select class="form-control" data-bind="
+                            options: $root.aboutTypes,
+                            optionsText: 'description',
+                            optionsValue: 'id',
+                            optionsCaption: 'Selecione...',
+                            value: type
+                            ">
+                        </select>
         			</div>
         		</div>
         		
@@ -74,7 +82,7 @@
                                 </td>
                                 <td><span data-bind="text: title"></span></td>
                                 <td><span data-bind="text: description"></span></td>
-                                <td><span data-bind="text: type"></span></td>
+                                <td><span data-bind="text: $root.getType(type())"></span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -213,14 +221,17 @@
 
             self.aboutList = ko.observableArray();
             self.about = ko.observable();
+            self.aboutTypes = ko.observableArray();
 
             self.setData = function(response)
             {
                 if (response.status)
                 {
-                    self.aboutList(ko.utils.arrayMap(response.data, function(obj) {
+                    self.aboutList(ko.utils.arrayMap(response.data.aboutList, function(obj) {
                         return new About(obj);
                     }));
+
+                    self.aboutTypes(response.data.aboutTypes);
                 }
             };
 
@@ -229,6 +240,15 @@
             	var about = new About({});
             	self.aboutList.push(about);
             	about.edit();
+            }
+
+            self.getType = function(id)
+            {
+                var type = ko.utils.arrayFirst(self.aboutTypes(), function(obj)
+                {
+                    return id == obj.id;
+                });
+                return type ? type.description : null;
             }
         }        
 
