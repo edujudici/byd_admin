@@ -14,6 +14,13 @@ class TeamServiceImpl implements TeamInterface {
 		$this->team = $team;
 	}
 
+	public function combobox()
+	{
+		return $this->team
+			->select('TEA_ID as id', 'TEA_NAME as description')
+			->get();
+	}
+
 	public function getData()
 	{
 		$team = $this->team->all();

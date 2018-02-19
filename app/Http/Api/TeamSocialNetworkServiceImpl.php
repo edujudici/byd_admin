@@ -16,8 +16,11 @@ class TeamSocialNetworkServiceImpl implements TeamSocialNetworkInterface {
 
 	public function getData()
 	{
-		$socialNetworks = $this->socialNetwork->all();
-		return response()->api($socialNetworks);
+		$teamServ = app(TeamInterface::class);
+		$data['team'] = $teamServ->combobox();
+		$data['socialNetworks'] = $this->socialNetwork->all();
+
+		return response()->api($data);
 	}
 
 	private function findById($id)

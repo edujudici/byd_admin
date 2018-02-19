@@ -23,7 +23,15 @@
         			<div class="form-row">
         				<div class="col-md-6">
         					<label for="txtTeam">Team</label>
-        					<input class="form-control" id="txtTeam" type="text" placeholder="Enter team" data-bind="value: teamId">
+        					{{-- <input class="form-control" id="txtTeam" type="text" placeholder="Enter team" data-bind="value: teamId"> --}}
+                            <select class="form-control" data-bind="
+                                options: $root.team,
+                                optionsText: 'description',
+                                optionsValue: 'id',
+                                optionsCaption: 'Selecione...',
+                                value: teamId
+                                ">
+                            </select>
         				</div>
         				<div class="col-md-6">
         					<label for="txtIcon">Icon</label>
@@ -72,7 +80,7 @@
                                     <i class="fa fa-pencil-square-o cursor-pointer" aria-hidden="true" data-bind="click: edit"></i>
                                     <i class="fa fa-trash-o cursor-pointer" aria-hidden="true" data-bind="click: remove"></i>
                                 </td>
-                                <td><span data-bind="text: teamId"></span></td>
+                                <td><span data-bind="text: $root.getName(teamId())"></span></td>
                                 <td><span data-bind="text: icon"></span></td>
                                 <td><span data-bind="text: link"></span></td>
                             </tr>
@@ -240,14 +248,17 @@
 
             self.teamSocialNetwork = ko.observableArray();
             self.socialNetwork = ko.observable();
+            self.team = ko.observableArray();
 
             self.setData = function(response)
             {
                 if (response.status)
                 {
-                    self.teamSocialNetwork(ko.utils.arrayMap(response.data, function(obj) {
+                    self.teamSocialNetwork(ko.utils.arrayMap(response.data.socialNetworks, function(obj) {
                         return new SocialNetwork(obj);
                     }));
+
+                    self.team(response.data.team);
                 }
             };
 
@@ -256,6 +267,15 @@
             	var socialNetwork = new SocialNetwork({});
             	self.teamSocialNetwork.push(socialNetwork);
             	socialNetwork.edit();
+            }
+
+            self.getName = function(id)
+            {
+                var obj = ko.utils.arrayFirst(self.team(), function(item)
+                {
+                    return id == item.id;
+                });
+                return obj ? obj.description : null;
             }
         }        
 
