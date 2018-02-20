@@ -3,26 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Api\HomeInterface;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $homeI;
+
+    public function __construct(HomeInterface $homeI)
     {
-        $this->middleware('auth');
+        $this->homeI = $homeI;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function show()
     {
-        return view('home');
+    	return view('home');
+    }
+
+    public function test()
+    {
+
+    	$url = 'http://31.220.56.32/image-link/1/b479c6779a09a596';
+    	$response = curlMake($url);
+    	debug($response);  
     }
 }
