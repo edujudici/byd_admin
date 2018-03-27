@@ -17,8 +17,16 @@ class PortfolioServiceImpl implements PortfolioInterface
 
     public function getData()
     {
+        $typeServ = app(PortfolioTypeInterface::class);
+        $portfolioTypeList = $typeServ->getData()['data'];
+
         $portfolioList = $this->portfolio->all();
-        return response()->api($portfolioList);
+
+        $data = [
+            'portfolio' => $portfolioList,
+            'types' => $portfolioTypeList
+        ];
+        return response()->api($data);
     }
 
     private function findById($id)
@@ -42,6 +50,7 @@ class PortfolioServiceImpl implements PortfolioInterface
 
         $this->portfolio->POR_TITLE = $request->title;
         $this->portfolio->POR_DESCRIPTION = $request->description;
+        $this->portfolio->POT_ID = $request->portfolioTypeId;
         $this->portfolio->save();
 
         return response()->api($this->portfolio);

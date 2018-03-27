@@ -43,6 +43,22 @@
         				</div>
         			</div>
         		</div>
+
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label for="txtTeam">Folder</label>
+                            <select class="form-control" data-bind="
+                                options: $root.types,
+                                optionsText: 'POT_TITLE',
+                                optionsValue: 'POT_ID',
+                                optionsCaption: 'Selecione...',
+                                value: portfolioTypeId
+                                ">
+                            </select>
+                        </div>
+                    </div>
+                </div>
         		
                 <div class="col-md-6 pull-left">
                     <a class="btn btn-primary btn-block" data-bind="click: cancel">Cancel</a>
@@ -69,6 +85,7 @@
                                 <th width="10%" style="min-width: 50px"></th>
                                 <th width="30%">Title</th>
                                 <th width="30">Description</th>
+                                <th width="30">Folder</th>
                             </tr>
                         </thead>
                         <tbody data-bind="foreach: portfolioList">
@@ -79,6 +96,7 @@
                                 </td>
                                 <td><span data-bind="text: title"></span></td>
                                 <td><span data-bind="text: description"></span></td>
+                                <td><span data-bind="text: $root.getPortfolioTypeName(portfolioTypeId())"></span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -124,6 +142,8 @@
                     message: 'The description field is required'
                 }
             });
+
+            self.portfolioTypeId = ko.observable(obj.POT_ID);
 
             self.errors = ko.validation.group(self);
 
@@ -191,6 +211,7 @@
 
                     formData.append('title', self.title());
                     formData.append('description', self.description());
+                    formData.append('portfolioTypeId', self.portfolioTypeId());                    
 
                 var callback = function(response)
                 {
@@ -269,14 +290,17 @@
 
             self.portfolioList = ko.observableArray();
             self.portfolio = ko.observable();
+            self.types = ko.observable();
 
             self.setData = function(response)
             {
                 if (response.status)
                 {
-                    self.portfolioList(ko.utils.arrayMap(response.data, function(obj) {
+                    self.portfolioList(ko.utils.arrayMap(response.data.portfolio, function(obj) {
                         return new Portfolio(obj);
                     }));
+
+                    self.types(response.data.types);
                 }
             };
 
@@ -285,6 +309,15 @@
             	var portfolio = new Portfolio({});
             	self.portfolioList.push(portfolio);
             	portfolio.edit();
+            }
+
+            self.getPortfolioTypeName = function(id)
+            {
+                var obj = ko.utils.arrayFirst(self.types(), function(item)
+                {
+                    return id == item.POT_ID;
+                });
+                return obj ? obj.POT_TITLE : null;
             }
         }        
 

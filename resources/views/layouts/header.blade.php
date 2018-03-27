@@ -11,58 +11,57 @@
 					<span class="nav-link-text">Dashboard</span>
 				</a>
 			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Banner">
-				<a class="nav-link" href="{{ route('banner.show') }}">
-					<i class="fa fa-fw fa-area-chart"></i>
-					<span class="nav-link-text">Banner</span>
-				</a>
-			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Services Offer">
-				<a class="nav-link" href="{{ route('services.offer.show') }}">
-					<i class="fa fa-fw fa-area-chart"></i>
-					<span class="nav-link-text">Services Offer</span>
-				</a>
-			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Partners">
-				<a class="nav-link" href="{{ route('partners.show') }}">
-					<i class="fa fa-fw fa-area-chart"></i>
-					<span class="nav-link-text">Partners</span>
-				</a>
-			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Company">
-				<a class="nav-link" href="{{ route('company.show') }}">
-					<i class="fa fa-fw fa-area-chart"></i>
-					<span class="nav-link-text">Company</span>
-				</a>
-			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="About">
-				<a class="nav-link" href="{{ route('about.show') }}">
-					<i class="fa fa-fw fa-area-chart"></i>
-					<span class="nav-link-text">About</span>
-				</a>
-			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Team">
-				<a class="nav-link" href="{{ route('team.show') }}">
-					<i class="fa fa-fw fa-area-chart"></i>
+
+
+			<li class="nav-item dropdown data-toggle="tooltip" data-placement="right" title="Home"">
+		        <a class="nav-link dropdown-toggle" href="#" id="dropHome" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		        	<i class="fa fa-fw fa-dashboard"></i>
+					<span class="nav-link-text">Home</span>
+		        </a>
+		        <ul class="dropdown-menu" aria-labelledby="dropHome">
+		        	<li><a class="dropdown-item" href="{{ route('banner.show') }}">Banner</a></li>
+		          	<li><a class="dropdown-item" href="{{ route('services.offer.show') }}">Services Offer</a></li>
+		          	<li><a class="dropdown-item" href="{{ route('partners.show') }}">Partners</a></li>
+		        </ul>
+		    </li>
+
+		    <li class="nav-item dropdown data-toggle="tooltip" data-placement="right" title="Team"">
+		        <a class="nav-link dropdown-toggle" href="#" id="dropTeam" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		        	<i class="fa fa-fw fa-dashboard"></i>
 					<span class="nav-link-text">Team</span>
-				</a>
-			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Team Social Network">
-				<a class="nav-link" href="{{ route('team.social.network.show') }}">
-					<i class="fa fa-fw fa-area-chart"></i>
-					<span class="nav-link-text">Team Social Network</span>
-				</a>
-			</li>
+		        </a>
+		        <ul class="dropdown-menu" aria-labelledby="dropTeam">
+		        	<li><a class="dropdown-item" href="{{ route('team.show') }}">Data Team</a></li>
+		        	<li><a class="dropdown-item" href="{{ route('team.social.network.show') }}">Social Network</a></li>
+		        </ul>
+		    </li>
+
+		    <li class="nav-item dropdown data-toggle="tooltip" data-placement="right" title="Company"">
+		        <a class="nav-link dropdown-toggle" href="#" id="dropCompany" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		        	<i class="fa fa-fw fa-dashboard"></i>
+					<span class="nav-link-text">Company</span>
+		        </a>
+		        <ul class="dropdown-menu" aria-labelledby="dropCompany">
+		        	<li><a class="dropdown-item" href="{{ route('company.show') }}">Data Company</a></li>
+		        	<li><a class="dropdown-item" href="{{ route('about.show') }}">About</a></li>
+		        </ul>
+		    </li>
+
+		    <li class="nav-item dropdown data-toggle="tooltip" data-placement="right" title="Gallery"">
+		        <a class="nav-link dropdown-toggle" href="#" id="dropGallery" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		        	<i class="fa fa-fw fa-dashboard"></i>
+					<span class="nav-link-text">Portfolio</span>
+		        </a>
+		        <ul class="dropdown-menu" aria-labelledby="dropGallery">
+		        	<li><a class="dropdown-item" href="{{ route('portfolio.type.show') }}">Folders</a></li>
+		        	<li><a class="dropdown-item" href="{{ route('portfolio.show') }}">Images</a></li>
+		        </ul>
+		    </li>
+			
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Services">
 				<a class="nav-link" href="{{ route('services.show') }}">
 					<i class="fa fa-fw fa-area-chart"></i>
 					<span class="nav-link-text">Services</span>
-				</a>
-			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Portfolio">
-				<a class="nav-link" href="{{ route('portfolio.show') }}">
-					<i class="fa fa-fw fa-area-chart"></i>
-					<span class="nav-link-text">Portfolio</span>
 				</a>
 			</li>
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Contact">

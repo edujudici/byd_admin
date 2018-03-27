@@ -218,6 +218,7 @@ return [
         App\Providers\BlogServiceProvider::class,
         App\Providers\ContactServiceProvider::class,
         App\Providers\PortfolioServiceProvider::class,
+        App\Providers\PortfolioTypeServiceProvider::class,
         App\Providers\ServicesServiceProvider::class,
         App\Providers\BannerServiceProvider::class,
         App\Providers\CompanyServiceProvider::class,

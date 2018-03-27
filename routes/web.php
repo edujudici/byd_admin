@@ -55,6 +55,10 @@ Route::group(['middleware' => 'auth'], function ()
 	Route::post('/portfolio-save',  ['as' => 'portfolio.save',  'uses' => 'PortfolioController@save']);
 	Route::post('/portfolio-delete',  ['as' => 'portfolio.delete',  'uses' => 'PortfolioController@delete']);
 
+	Route::get('/portfolio-type', ['as' => 'portfolio.type.show', 'uses' => 'PortfolioTypeController@show']);
+	Route::post('/portfolio-type-save',  ['as' => 'portfolio.type.save',  'uses' => 'PortfolioTypeController@save']);
+	Route::post('/portfolio-type-delete',  ['as' => 'portfolio.type.delete',  'uses' => 'PortfolioTypeController@delete']);
+
 	Route::get('/team-social-network', ['as' => 'team.social.network.show', 'uses' => 'TeamSocialNetworkController@show']);
 	Route::post('/team-social-save',  ['as' => 'team.social.network.save',  'uses' => 'TeamSocialNetworkController@save']);
 	Route::post('/team-social-delete',  ['as' => 'team.social.network.delete',  'uses' => 'TeamSocialNetworkController@delete']);
