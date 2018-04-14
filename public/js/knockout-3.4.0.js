@@ -350,3 +350,26 @@ ko.bindingHandlers.sortableList = {
         });
     }
 };
+
+ko.bindingHandlers.color = {    
+    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+
+    	var color = ko.unwrap(valueAccessor());
+    	$(element).spectrum({
+            color: color,
+            showInitial: true,
+            showPalette: true,
+            preferredFormat: "hex"
+        });
+    },
+    update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+
+    	var color = ko.unwrap(valueAccessor());
+    	$(element).spectrum({
+            color: color,
+            showInitial: true,
+            showPalette: true,
+            preferredFormat: "hex"
+        });
+    }
+};

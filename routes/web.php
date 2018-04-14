@@ -63,6 +63,10 @@ Route::group(['middleware' => 'auth'], function ()
 	Route::post('/team-social-save',  ['as' => 'team.social.network.save',  'uses' => 'TeamSocialNetworkController@save']);
 	Route::post('/team-social-delete',  ['as' => 'team.social.network.delete',  'uses' => 'TeamSocialNetworkController@delete']);
 
+	Route::get('/video', ['as' => 'video.show', 'uses' => 'VideoController@show']);
+	Route::post('/video-save',  ['as' => 'video.save',  'uses' => 'VideoController@save']);
+	Route::post('/video-delete',  ['as' => 'video.delete',  'uses' => 'VideoController@delete']);
+
 	Route::get('/contact', ['as' => 'contact.show', 'uses' => 'ContactController@show']);
 });
 

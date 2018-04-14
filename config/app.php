@@ -227,6 +227,7 @@ return [
         App\Providers\AboutServiceProvider::class,
         App\Providers\TeamServiceProvider::class,
         App\Providers\TeamSocialNetworkServiceProvider::class,
+        App\Providers\VideoServiceProvider::class,
 
     ],
 

@@ -41,12 +41,27 @@
         					<label for="txtDescription">Description</label>
         					<input class="form-control" id="txtDescription" type="text" placeholder="Enter description" data-bind="value: description">
         				</div>
+                        
         			</div>
         		</div>
         		<div class="form-group">
                     <div class="form-row">
-            			<label for="txtLink">Link</label>
-            			<input class="form-control" id="txtLink" type="text" placeholder="Enter Link" data-bind="value: link">
+                        <div class="col-md-12">
+                            <label for="txtLink">Link</label>
+                            <input class="form-control" id="txtLink" type="text" placeholder="Enter Link" data-bind="value: link">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-2">
+                            <label for="txtColor">Background Color</label><br>
+                            <input class="form-control" id="txtColor" type="text" placeholder="Enter color" data-bind="color: color, value: color">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="txtFontColor">Font Color</label><br>
+                            <input class="form-control" id="txtFontColor" type="text" placeholder="Enter font color" data-bind="color: fontColor, value: fontColor">
+                        </div>
         	        </div>
                 </div>
         		
@@ -133,6 +148,8 @@
                     message: 'The description field is required'
                 }
             });
+            self.color = ko.observable(obj.BAN_COLOR);
+            self.fontColor = ko.observable(obj.BAN_FONT_COLOR);
 
             self.errors = ko.validation.group(self);
 
@@ -151,6 +168,7 @@
             self.edit = function()
             {
             	viewModel.banner(self);
+                // self.setColor();
             }
 
             self.remove = function(item)
@@ -201,6 +219,8 @@
                     formData.append('title', self.title());
                     formData.append('description', self.description());
                     formData.append('link', self.link());
+                    formData.append('color', self.color());
+                    formData.append('fontColor', self.fontColor());
 
                 var callback = function(response)
                 {
@@ -271,6 +291,17 @@
                     self.image(url);
                 }
             });
+
+            // self.setColor = function()
+            // {
+            //     //TODO: CREATE COMPONENT KNOCKOUT
+            //     $("#txtColor").spectrum({
+            //         color: "#f00",
+            //         showInitial: true,
+            //         showPalette: true,
+            //         preferredFormat: "hex"
+            //     });
+            // }
         }
 
         function ViewModel()
@@ -294,12 +325,13 @@
             {
             	var banner = new Banner({});
             	self.banners.push(banner);
-            	banner.edit();
+                banner.edit();
             }
         }        
 
         var viewModel = new ViewModel();
         viewModel.setData(response);
         ko.applyBindings(viewModel, document.getElementById('koBanner'));
+
     </script>
 @endsection

@@ -58,12 +58,20 @@
 		        </ul>
 		    </li>
 			
+			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Video">
+				<a class="nav-link" href="{{ route('video.show') }}">
+					<i class="fa fa-fw fa-area-chart"></i>
+					<span class="nav-link-text">Video</span>
+				</a>
+			</li>
+
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Services">
 				<a class="nav-link" href="{{ route('services.show') }}">
 					<i class="fa fa-fw fa-area-chart"></i>
 					<span class="nav-link-text">Services</span>
 				</a>
 			</li>
+
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Contact">
 				<a class="nav-link" href="{{ route('contact.show') }}">
 					<i class="fa fa-fw fa-area-chart"></i>
