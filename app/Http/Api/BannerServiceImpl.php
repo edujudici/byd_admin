@@ -45,6 +45,7 @@ class BannerServiceImpl implements BannerInterface
 		$this->banner->BAN_LINK = $request->link;
 		$this->banner->BAN_COLOR = $request->color;
 		$this->banner->BAN_FONT_COLOR = $request->fontColor;
+		$this->banner->BAN_ORDER = $this->banner->count()+1;
 		$this->banner->save();
 
 		return response()->api($this->banner);
