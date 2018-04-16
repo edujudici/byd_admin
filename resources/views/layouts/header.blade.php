@@ -15,7 +15,7 @@
 
 			<li class="nav-item dropdown data-toggle="tooltip" data-placement="right" title="Home"">
 		        <a class="nav-link dropdown-toggle" href="#" id="dropHome" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		        	<i class="fa fa-fw fa-dashboard"></i>
+		        	<i class="fa fa-fw fa-home"></i>
 					<span class="nav-link-text">Home</span>
 		        </a>
 		        <ul class="dropdown-menu" aria-labelledby="dropHome">
@@ -27,7 +27,7 @@
 
 		    <li class="nav-item dropdown data-toggle="tooltip" data-placement="right" title="Team"">
 		        <a class="nav-link dropdown-toggle" href="#" id="dropTeam" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		        	<i class="fa fa-fw fa-dashboard"></i>
+		        	<i class="fa fa-fw fa-users"></i>
 					<span class="nav-link-text">Team</span>
 		        </a>
 		        <ul class="dropdown-menu" aria-labelledby="dropTeam">
@@ -38,7 +38,7 @@
 
 		    <li class="nav-item dropdown data-toggle="tooltip" data-placement="right" title="Company"">
 		        <a class="nav-link dropdown-toggle" href="#" id="dropCompany" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		        	<i class="fa fa-fw fa-dashboard"></i>
+		        	<i class="fa fa-fw fa-building"></i>
 					<span class="nav-link-text">Company</span>
 		        </a>
 		        <ul class="dropdown-menu" aria-labelledby="dropCompany">
@@ -49,7 +49,7 @@
 
 		    <li class="nav-item dropdown data-toggle="tooltip" data-placement="right" title="Gallery"">
 		        <a class="nav-link dropdown-toggle" href="#" id="dropGallery" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		        	<i class="fa fa-fw fa-dashboard"></i>
+		        	<i class="fa fa-fw fa-picture-o"></i>
 					<span class="nav-link-text">Portfolio</span>
 		        </a>
 		        <ul class="dropdown-menu" aria-labelledby="dropGallery">
@@ -60,21 +60,21 @@
 			
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Video">
 				<a class="nav-link" href="{{ route('video.show') }}">
-					<i class="fa fa-fw fa-area-chart"></i>
+					<i class="fa fa-fw fa-video-camera"></i>
 					<span class="nav-link-text">Video</span>
 				</a>
 			</li>
 
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Services">
 				<a class="nav-link" href="{{ route('services.show') }}">
-					<i class="fa fa-fw fa-area-chart"></i>
+					<i class="fa fa-fw fa-server"></i>
 					<span class="nav-link-text">Services</span>
 				</a>
 			</li>
 
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Contact">
 				<a class="nav-link" href="{{ route('contact.show') }}">
-					<i class="fa fa-fw fa-area-chart"></i>
+					<i class="fa fa-fw fa-envelope-open"></i>
 					<span class="nav-link-text">Contact</span>
 				</a>
 			</li>
