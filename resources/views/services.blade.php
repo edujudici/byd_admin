@@ -103,18 +103,30 @@
                 required: {
                     params: true,
                     message: 'The title field is required'
+                },
+                maxLength: {
+                    params: 50,
+                    message: 'The title may not be greater than 50 characters.'
                 }
             });
             self.description = ko.observable(obj.SER_DESCRIPTION).extend({
                 required: {
                     params: true,
                     message: 'The description field is required'
+                },
+                maxLength: {
+                    params: 200,
+                    message: 'The description may not be greater than 200 characters.'
                 }
             });
             self.icon  = ko.observable(obj.SER_ICON).extend({
                 required: {
                     params: true,
                     message: 'The icon field is required'
+                },
+                maxLength: {
+                    params: 100,
+                    message: 'The icon may not be greater than 100 characters.'
                 }
             });
 

@@ -84,18 +84,30 @@
                 required: {
                     params: true,
                     message: 'The file address is required'
+                },
+                maxLength: {
+                    params: 255,
+                    message: 'The address may not be greater than 255 characters.'
                 }
             });
             self.email  = ko.observable(obj.COM_EMAIL).extend({
                 required: {
                     params: true,
                     message: 'The file email is required'
+                },
+                maxLength: {
+                    params: 150,
+                    message: 'The email may not be greater than 150 characters.'
                 }
             });
             self.telephone  = ko.observable(obj.COM_TELEPHONE).extend({
                 required: {
                     params: true,
                     message: 'The file telephone is required'
+                },
+                maxLength: {
+                    params: 50,
+                    message: 'The telephone may not be greater than 50 characters.'
                 }
             });
             self.iframe  = ko.observable(obj.COM_IFRAME).extend({
@@ -186,7 +198,7 @@
                         imageCounter = 0;
                     while ( file = el.files[ ++counter ] ) {
                         
-                        if(file.size > 10 * 1024 * 1024) {
+                        if(file.size > 1 * 1024 * 1024) {
                             infoAlert.error(['File too big.']);
 
                         } else {

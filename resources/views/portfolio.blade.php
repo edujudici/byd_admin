@@ -134,12 +134,20 @@
                 required: {
                     params: true,
                     message: 'The title field is required'
+                },
+                maxLength: {
+                    params: 50,
+                    message: 'The title may not be greater than 50 characters.'
                 }
             });
             self.description = ko.observable(obj.POR_DESCRIPTION).extend({
                 required: {
                     params: true,
                     message: 'The description field is required'
+                },
+                maxLength: {
+                    params: 200,
+                    message: 'The description may not be greater than 200 characters.'
                 }
             });
 
@@ -256,7 +264,7 @@
                         imageCounter = 0;
                     while ( file = el.files[ ++counter ] ) {
                         
-                        if(file.size > 10 * 1024 * 1024) {
+                        if(file.size > 1 * 1024 * 1024) {
                             infoAlert.error(['File too big.']);
 
                         } else {

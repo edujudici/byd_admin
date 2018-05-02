@@ -112,12 +112,20 @@
                 required: {
                     params: true,
                     message: 'The title field is required'
+                },
+                maxLength: {
+                    params: 50,
+                    message: 'The title may not be greater than 50 characters.'
                 }
             });
             self.description = ko.observable(obj.ABO_DESCRIPTION).extend({
                 required: {
                     params: true,
                     message: 'The description field is required'
+                },
+                maxLength: {
+                    params: 200,
+                    message: 'The description may not be greater than 200 characters.'
                 }
             });
             self.type  = ko.observable(obj.ABO_TYPE).extend({

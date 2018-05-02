@@ -215,7 +215,7 @@
                         imageCounter = 0;
                     while ( file = el.files[ ++counter ] ) {
                         
-                        if(file.size > 10 * 1024 * 1024) {
+                        if(file.size > 1 * 1024 * 1024) {
                             infoAlert.error(['File too big.']);
 
                         } else {

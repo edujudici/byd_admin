@@ -118,12 +118,20 @@
                 required: {
                     params: true,
                     message: 'The icon field is required'
+                },
+                maxLength: {
+                    params: 100,
+                    message: 'The icon may not be greater than 100 characters.'
                 }
             });
             self.link = ko.observable(obj.TSN_LINK).extend({
                 required: {
                     params: true,
                     message: 'The link field is required'
+                },
+                maxLength: {
+                    params: 255,
+                    message: 'The link may not be greater than 255 characters.'
                 }
             });
 
@@ -223,7 +231,7 @@
                         imageCounter = 0;
                     while ( file = el.files[ ++counter ] ) {
                         
-                        if(file.size > 10 * 1024 * 1024) {
+                        if(file.size > 1 * 1024 * 1024) {
                             infoAlert.error(['File too big.']);
 
                         } else {

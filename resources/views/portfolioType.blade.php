@@ -89,6 +89,10 @@
                 required: {
                     params: true,
                     message: 'The title field is required'
+                },
+                maxLength: {
+                    params: 50,
+                    message: 'The title may not be greater than 50 characters.'
                 }
             });
 
