@@ -208,3 +208,26 @@
 		</div>
 	</div>
 </div>
+
+<!-- Modal loading -->
+<div class="modal fade" id="modalLoading" tabindex="-1" role="dialog" aria-labelledby="modalLoadingModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title center" id="modalLoadingModalLabel">
+				Please wait!
+				</h5>
+				
+				{{-- <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button> --}}
+			</div>
+			<div class="modal-body text-center">
+				Loading...
+				<div class="progress">
+  					<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

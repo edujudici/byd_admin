@@ -1,7 +1,7 @@
 function Api()
 {
-
-}
+    [native/code]
+};
 
 Api.ajaxSetup = function()
 {
@@ -16,7 +16,7 @@ Api.post = function(url, data, callback)
 {
 
     Api.ajaxSetup();
-    //Api.showLoading();
+    Api.showLoading();
 
     $.post( url, data, function(data) {
         try
@@ -39,14 +39,14 @@ Api.post = function(url, data, callback)
     })
     .always(function()
     {
-        //Api.hideLoading();
+        Api.hideLoading();
     });
 }
 
 Api.postImage = function(url, formData, callback) {
       
     Api.ajaxSetup();      
-    //Api.showLoading();
+    Api.showLoading();
 
     $.ajax({
         url: url,
@@ -77,7 +77,7 @@ Api.postImage = function(url, formData, callback) {
         },
         complete: function()
         {
-            //Api.hideLoading();
+            Api.hideLoading();
         }
     });
 };
@@ -124,9 +124,13 @@ Api.url = function(id)
 Api.showLoading = function()
 {
     waitingDialog.show();
+    // $('#modalLoading').modal('show');
 }
 
 Api.hideLoading = function()
 {
-    waitingDialog.hide();
+    setTimeout(function(){ 
+        // $('#modalLoading').modal('hide');
+        waitingDialog.hide();
+    }, 2000);
 }
